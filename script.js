@@ -1,6 +1,23 @@
 human_score = 0;
 computer_score = 0;
 
+const rockBtn = document.querySelector("#rock-btn");
+rockBtn.addEventListener("click", () => {
+    let human_choice = "rock";
+});
+
+const paperBtn = document.querySelector("#paper-btn");
+paperBtn.addEventListener(click, () = > {
+    let human_choice = "paper";
+})
+
+const scissorBtn = document.querySelector("#scissors-btn");
+scissorBtn.addEventListener(click, () => {
+    let human_choice = "scissors";
+})
+
+
+
 function getComputerChoice() {
     let num = Math.floor(Math.random()*3)+1;
     switch(num) {
@@ -18,23 +35,23 @@ function getComputerChoice() {
     return computer_choice
 }
 
-function getHumanChoice() {
-    let human_string = prompt("Rock, Paper, Scissors Shoot!");
-    human_string = human_string.toLowerCase();
-    switch(human_string) {
-        case "rock":
-            human_choice = "rock";
-            break;
-        case "paper":
-            human_choice = "paper";
-            break;
-        case "scissors":
-            human_choice = "scissors";
-            break;
-    }
-    console.log(`You chose: ${human_choice}`)
-    return human_choice;
-}
+// function getHumanChoice() {
+//     let human_string = prompt("Rock, Paper, Scissors Shoot!");
+//     human_string = human_string.toLowerCase();
+//     switch(human_string) {
+//         case "rock":
+//             human_choice = "rock";
+//             break;
+//         case "paper":
+//             human_choice = "paper";
+//             break;
+//         case "scissors":
+//             human_choice = "scissors";
+//             break;
+//     }
+//     console.log(`You chose: ${human_choice}`)
+//     return human_choice;
+// }
 
 function playRound(human_choice, computer_choice) {
     let result;
@@ -83,7 +100,6 @@ function keepScore(result) {
     console.log(`Human: ${human_score} Computer: ${computer_score}`)
 }
 
-
 function playGame() {
     for (let i = 1; i <= 5; i++) {
         const human_choice = getHumanChoice();
@@ -94,6 +110,8 @@ function playGame() {
         keepScore(result);
     }
 }
+
+
 
 playGame();
 
