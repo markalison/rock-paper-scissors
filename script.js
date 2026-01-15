@@ -1,8 +1,10 @@
-human_score = 0;
-computer_score = 0;
+let human_score = 0;
+let computer_score = 0;
+let human_choice = ""
 
 function getComputerChoice() {
-    let num = Math.floor(Math.random()*3)+1;
+    const num = Math.floor(Math.random()*3)+1;
+    let computer_choice;
     switch(num) {
         case 1:
             computer_choice = "rock";
@@ -103,7 +105,7 @@ const roundResult = document.querySelector("#round-result");
 
 const results = document.querySelector("#results")
 const finalResult = document.querySelector("#final-result");
-function declareResult(result) {
+function declareResult(result, computer_choice) {
     
         if (result == "draw") {
             // console.log("Draw!")
@@ -152,7 +154,7 @@ function playGame() {
         
         
         const result = playRound(human_choice, computer_choice);
-        declareResult(result);
+        declareResult(result, computer_choice);
     
 }
 
