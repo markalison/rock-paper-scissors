@@ -1,23 +1,6 @@
 human_score = 0;
 computer_score = 0;
 
-const rockBtn = document.querySelector("#rock-btn");
-rockBtn.addEventListener("click", () => {
-    let human_choice = "rock";
-});
-
-const paperBtn = document.querySelector("#paper-btn");
-paperBtn.addEventListener(click, () = > {
-    let human_choice = "paper";
-})
-
-const scissorBtn = document.querySelector("#scissors-btn");
-scissorBtn.addEventListener(click, () => {
-    let human_choice = "scissors";
-})
-
-
-
 function getComputerChoice() {
     let num = Math.floor(Math.random()*3)+1;
     switch(num) {
@@ -32,8 +15,35 @@ function getComputerChoice() {
             break;
     }
     console.log(`The computer chose: ${computer_choice}`);
-    return computer_choice
+    return computer_choice;
 }
+
+const rockBtn = document.querySelector("#rock-btn");
+rockBtn.addEventListener("click", () => {
+    human_choice = "rock";
+ });
+
+// rockBtn.addEventListener("click", playRound("rock", getComputerChoice));
+// rockBtn.addEventListener("click", declareResult);
+
+const paperBtn = document.querySelector("#paper-btn");
+paperBtn.addEventListener("click", () => {
+     human_choice = "paper";
+ });
+// paperBtn.addEventListener("click", getComputerChoice);
+// paperBtn.addEventListener("click", playRound("paper", getComputerChoice));
+
+const scissorsBtn = document.querySelector("#scissors-btn");
+ scissorsBtn.addEventListener("click", () => {
+     human_choice = "scissors";
+ })
+
+// scissorsBtn.addEventListener("click", getComputerChoice);
+// scissorsBtn.addEventListener("click", playRound("scissors", getComputerChoice));
+
+
+
+
 
 // function getHumanChoice() {
 //     let human_string = prompt("Rock, Paper, Scissors Shoot!");
@@ -55,6 +65,7 @@ function getComputerChoice() {
 
 function playRound(human_choice, computer_choice) {
     let result;
+    
 
     switch(`${human_choice}-${computer_choice}`) {
         case "rock-rock":
@@ -71,6 +82,7 @@ function playRound(human_choice, computer_choice) {
             break;
         case "paper-paper":
             result = "draw";
+            break;
         case "paper-scissors":
             result = "computer_wins";
             break;
@@ -87,34 +99,84 @@ function playRound(human_choice, computer_choice) {
     return result;
 }
 
-function keepScore(result) {
-    if (result == "draw") {
-        console.log("Draw!")
-    } else if (result == "computer_wins") {
-        console.log(`You lose! ${computer_choice} beats ${human_choice}`);
-        computer_score++;
-    } else {
-        console.log(`You win! ${human_choice} beats ${computer_choice}`);
-        human_score++;
-    }
-    console.log(`Human: ${human_score} Computer: ${computer_score}`)
+const roundResult = document.querySelector("#round-result");
+
+const results = document.querySelector("#results")
+const finalResult = document.querySelector("#final-result");
+function declareResult(result) {
+    
+        if (result == "draw") {
+            // console.log("Draw!")
+            roundResult.textContent = "Draw!";
+        } else if (result == "computer_wins") {
+            // console.log(`You lose! ${computer_choice} beats ${human_choice}`);
+            roundResult.textContent = `You lose! ${computer_choice.charAt(0).toUpperCase()}${computer_choice.slice(1)} beats ${human_choice}!`
+            computer_score++;
+        } else {
+            // console.log(`You win! ${human_choice} beats ${computer_choice}`);
+            roundResult.textContent = `You win! ${human_choice.charAt(0).toUpperCase()}${human_choice.slice(1)} beats ${computer_choice}!`
+            human_score++;
+        }
+        results.textContent = `You: ${human_score} Computer: ${computer_score}`
+        console.log(`Human: ${human_score} Computer: ${computer_score}`)
+
+        if (human_score == 5) {
+            finalResult.textContent = "You win!"
+            buttons.forEach((button) => {
+                button.style.display = "none";
+            
+            });
+            playAgain.style.display = "block";
+        } else if (computer_score == 5) {
+            finalResult.textContent = "The computer wins!";
+            buttons.forEach((button) => {
+                button.style.display = "none";
+            });
+            playAgain.style.display = "block";
+        } else {
+            finalResult.textContent = "First to five wins!";
+        }
+        
 }
 
+
+
+
+
+
+
 function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        const human_choice = getHumanChoice();
+    
+        
         const computer_choice = getComputerChoice();
         
         
         const result = playRound(human_choice, computer_choice);
-        keepScore(result);
-    }
+        declareResult(result);
+    
 }
 
+const playAgain = document.querySelector("#play-again");
+const buttons = document.querySelectorAll("button:not(#play-again)");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playGame();
+    });
+});
 
+function pressPlayAgain() {
+    human_score = 0;
+    computer_score = 0;
+    buttons.forEach((button) => {
+        button.style.display = "inline-block";
+    });
+    playAgain.style.display = "none";
+    roundResult.textContent = "";
+    results.textContent = "";
+    finalResult.textContent = "";
+}
 
-playGame();
-
+playAgain.addEventListener("click", pressPlayAgain);
 
 
 

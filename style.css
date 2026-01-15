@@ -1,0 +1,39 @@
+body {
+    background-color: #0D0221;
+}
+* {
+    font-family: "Press Start 2P", "Arial", "sans-serif";
+}
+#app-container {
+    display:flex;
+    text-align: center;
+    flex-direction: column;
+    
+    color: #FF00FF;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#rock-btn, #paper-btn, #scissors-btn {
+    margin: 10px;
+}
+
+#round-result, #results, #final-result {
+    margin: 20px;
+}
+button {
+    background-color: #FF00FF;
+    border: 1px solid darkgoldenrod;
+    width: 150px;
+    height: 150px;
+    color: #0D0221
+}
+
+#play-again {
+    display: none;
+}
+
